@@ -1,16 +1,23 @@
-all: main.exe run
+# windows
+all-cygwin: main-cygwin run-cygwin
 
-main.exe: src/main.c src/main.h
+main-cygwin: src/main.c src/main.h
 	if not exist "target" mkdir target
 	gcc ./src/main.c -o ./target/main.exe
 
-run: main.exe
+run-cygwin: main-cygwin
 	./target/main.exe
+
+# linux/macos
+all-gnu: main run-gnu
+
+main-gnu: src/main.c src/main.h
+	if not exist "target" mkdir target
+	gcc ./src/main.c -o ./target/main
+
+run-gnu: main-gnu
+	./target/main
 
 # its fucky - dont know why :'(
 # debug: main.exe
 # 	gdb ./target/main.exe
-
-clean:
-	if exist "./target/main.exe" del /Q ./target/main.exe
-	if exist "./target" rmdir /Q /S ./target
