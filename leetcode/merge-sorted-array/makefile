@@ -9,10 +9,10 @@ run-cygwin: main-cygwin
 	./target/main.exe
 
 # linux/macos
-all-gnu: main run-gnu
+all-gnu: main-gnu run-gnu
 
 main-gnu: src/main.c src/main.h
-	if not exist "target" mkdir target
+	mkdir -p target
 	gcc ./src/main.c -o ./target/main
 
 run-gnu: main-gnu
